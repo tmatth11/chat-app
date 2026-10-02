@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
-        <html lang="en" className={`${roboto.className}`} suppressHydrationWarning>
+        <html lang="en" className={roboto.className} suppressHydrationWarning>
             <body className="bg-main dark:text-white">
                 <ThemeProvider
                     attribute="class"
