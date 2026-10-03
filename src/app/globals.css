@@ -10,6 +10,8 @@
     --clr-btn-secondary-hover: var(--color-neutral-600);
     --clr-container-primary: var(--color-neutral-200);
     --clr-text-input: var(--color-neutral-300);
+    --clr-navbar: var(--color-neutral-200);
+    --clr-link-hover: var(--color-gray-400);
 }
 
 .dark {
@@ -18,6 +20,8 @@
     --clr-btn-secondary-hover: var(--color-slate-600);
     --clr-container-primary: var(--color-slate-700);
     --clr-text-input: var(--color-slate-800);
+    --clr-navbar: var(--color-black);
+    --clr-link-hover: var(--color-gray-400);
 }
 
 /* Theme */
@@ -30,6 +34,8 @@
     --color-btn-secondary-hover: var(--clr-btn-secondary-hover);
     --color-container-primary: var(--clr-container-primary);
     --color-text-input: var(--clr-text-input);
+    --color-navbar: var(--clr-navbar);
+    --color-link-hover: var(--clr-link-hover);
 }
 
 /* Headings */
@@ -64,6 +70,16 @@ h4 {
 
 .btn-primary {
     @apply bg-btn-primary hover:bg-btn-primary-hover disabled:hover:bg-btn-primary;
+}
+
+.mode-toggle {
+    @apply h-[1.2rem] w-[1.2rem];
+}
+
+/* Links */
+
+.nav-link {
+    @apply flex items-center gap-2 hover:text-link-hover;
 }
 
 /* Custom Focus Outline */
