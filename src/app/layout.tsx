@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                     enableColorScheme={false}
                 >
                     <Navbar />
-                    <main className="flex min-h-dvh flex-col">
+                    <main className="min-h-dvh">
                         {children}
                         <Analytics />
                     </main>
