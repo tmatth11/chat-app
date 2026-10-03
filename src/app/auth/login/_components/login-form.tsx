@@ -6,39 +6,25 @@ import { createClient } from "@/src/lib/client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export function SignUpForm() {
+export function LoginForm() {
     const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const router = useRouter();
 
-    const handleSignUp = async (e: React.SubmitEvent) => {
+    const handleLogin = async (e: React.SubmitEvent) => {
         e.preventDefault();
 
         const supabase = createClient();
         setIsLoading(true);
         setError(null);
 
-        if (password !== confirmPassword) {
-            setError("Error: Passwords do not match.");
-            setIsLoading(false);
-
-            return;
-        }
-
         try {
-            const { error } = await supabase.auth.signUp({
-                email: email,
-                password: password,
-                options: {
-                    data: {
-                        username: username,
-                    },
-                },
+            const { error } = await supabase.auth.signInWithPassword({
+                email,
+                password
             });
 
             if (error) throw error;
@@ -56,13 +42,13 @@ export function SignUpForm() {
         <div className="bg-container-primary mt-2 flex w-sm flex-col rounded-md p-4 md:w-md">
             {/* Header */}
             <div className="flex flex-col">
-                <h4>Sign up</h4>
-                <p>Create an account using an email, username, and password.</p>
+                <h4>Log in</h4>
+                <p>Log in using your email and password.</p>
             </div>
             {/* Divider */}
             <hr className="mt-4 border-t" />
             {/* Sign Up Form */}
-            <form onSubmit={handleSignUp} className="flex flex-col">
+            <form onSubmit={handleLogin} className="flex flex-col">
                 {/* Email input */}
                 <label className="form-group">
                     <span className="form-label">Email</span>
@@ -73,19 +59,6 @@ export function SignUpForm() {
                         placeholder="Enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </label>
-                {/* Username input */}
-                <label className="form-group">
-                    <span className="form-label">Username</span>
-                    <input
-                        className="form-input"
-                        id="username"
-                        type="text"
-                        placeholder="Enter username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </label>
@@ -102,19 +75,6 @@ export function SignUpForm() {
                         required
                     />
                 </label>
-                {/* Confirm password input */}
-                <label className="form-group">
-                    <span className="form-label">Confirm Password</span>
-                    <input
-                        className="form-input"
-                        id="confirm-password"
-                        type="password"
-                        placeholder="Confirm password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
-                </label>
                 {/* Error message */}
                 <div className="my-4 flex items-center justify-center">
                     {error && <p className="form-error">{error}</p>}
@@ -125,7 +85,7 @@ export function SignUpForm() {
                     type="submit"
                     disabled={isLoading}
                 >
-                    {isLoading ? "Creating account..." : "Sign up"}
+                    {isLoading ? "Logging in..." : "Log in"}
                 </button>
             </form>
         </div>
