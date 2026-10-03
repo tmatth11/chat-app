@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Color Scheme */
+
+:root {
+    --clr-background: var(--color-white);
+    --clr-btn-secondary: var(--color-neutral-700);
+    --clr-btn-secondary-hover: var(--color-neutral-600);
+    --clr-container-primary: var(--color-neutral-200);
+    --clr-text-input: var(--color-neutral-300);
+}
+
+.dark {
+    --clr-background: var(--color-neutral-900);
+    --clr-btn-secondary: var(--color-slate-700);
+    --clr-btn-secondary-hover: var(--color-slate-600);
+    --clr-container-primary: var(--color-slate-700);
+    --clr-text-input: var(--color-slate-800);
+}
+
+/* Theme */
+
+@theme {
+    --color-main: var(--clr-background);
+    --color-btn-primary: var(--color-blue-700);
+    --color-btn-primary-hover: var(--color-blue-600);
+    --color-btn-secondary: var(--clr-btn-secondary);
+    --color-btn-secondary-hover: var(--clr-btn-secondary-hover);
+    --color-container-primary: var(--clr-container-primary);
+    --color-text-input: var(--clr-text-input);
+}
+
+/* Headings */
+
+h4 {
+    @apply font-semibold text-lg;
+}
+
+/* Form Elements */
+
+.form-group {
+    @apply mt-4 flex flex-col gap-2;
+}
+
+.form-label {
+    @apply font-semibold;
+}
+
+.form-input {
+    @apply rounded-md p-2 bg-text-input;
+}
+
+.form-error {
+    @apply text-red-500 wrap-break-word;
+}
+
+/* Buttons */
+
+.btn {
+    @apply p-2 rounded-md text-center font-semibold enabled:cursor-pointer disabled:cursor-not-allowed;
+}
+
+.btn-primary {
+    @apply bg-btn-primary hover:bg-btn-primary-hover disabled:hover:bg-btn-primary;
+}
+
+/* Custom Focus Outline */
+
+*:focus-visible {
+    outline: none;
+}
+
+*:focus-visible {
+    @apply outline-2 dark:outline-white outline-yellow-700;
+}
