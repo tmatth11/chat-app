@@ -9,6 +9,7 @@ import {
     List,
     LogOut,
     Menu,
+    X,
 } from "lucide-react";
 import ModeToggle from "./mode-toggle";
 import { createClient } from "@/src/lib/client";
@@ -24,7 +25,7 @@ export default function Navbar() {
 
     const handleSignOut = async () => {
         await supabase.auth.signOut();
-        router.push('/');
+        router.push("/");
         router.refresh();
     };
 
@@ -117,18 +118,18 @@ export default function Navbar() {
                     <div className="nav-link">
                         <ModeToggle />
                     </div>
-                    {/* Hamburger menu */}
+                    {/* Hamburger menu/close button */}
                     <button
                         className="hover:text-link-hover flex cursor-pointer md:hidden"
-                        aria-label="Expand menu"
-                        title="Expand menu"
+                        aria-label={linksDisplay === "hidden" ? "Expand menu" : "Close menu"}
+                        title={linksDisplay === "hidden" ? "Expand menu" : "Close menu"}
                         onClick={() =>
                             linksDisplay == "hidden"
                                 ? setLinksDisplay("flex")
                                 : setLinksDisplay("hidden")
                         }
                     >
-                        <Menu />
+                        {linksDisplay === "hidden" ? <Menu /> : <X />}
                     </button>
                 </div>
             </nav>
