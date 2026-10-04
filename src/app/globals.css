@@ -69,7 +69,7 @@ h4 {
 }
 
 .btn-primary {
-    @apply bg-btn-primary hover:bg-btn-primary-hover disabled:hover:bg-btn-primary;
+    @apply bg-btn-primary hover:bg-btn-primary-hover disabled:hover:bg-btn-primary text-white;
 }
 
 .mode-toggle {
