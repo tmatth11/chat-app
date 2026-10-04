@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
         <html lang="en" className={roboto.className} suppressHydrationWarning>
-            <body className="bg-main dark:text-white">
+            <body className="bg-main dark:text-white min-h-dvh">
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                     enableColorScheme={false}
                 >
                     <Navbar />
-                    <main className="min-h-dvh">
+                    <main className="flex-1">
                         {children}
                         <Analytics />
                     </main>
