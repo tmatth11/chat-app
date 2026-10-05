@@ -12,7 +12,7 @@ import {
     X,
 } from "lucide-react";
 import ModeToggle from "./mode-toggle";
-import { createClient } from "@/src/lib/client";
+import { createClient } from "@/src/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
@@ -121,8 +121,16 @@ export default function Navbar() {
                     {/* Hamburger menu/close button */}
                     <button
                         className="hover:text-link-hover flex cursor-pointer md:hidden"
-                        aria-label={linksDisplay === "hidden" ? "Expand menu" : "Close menu"}
-                        title={linksDisplay === "hidden" ? "Expand menu" : "Close menu"}
+                        aria-label={
+                            linksDisplay === "hidden"
+                                ? "Expand menu"
+                                : "Close menu"
+                        }
+                        title={
+                            linksDisplay === "hidden"
+                                ? "Expand menu"
+                                : "Close menu"
+                        }
                         onClick={() =>
                             linksDisplay == "hidden"
                                 ? setLinksDisplay("flex")
