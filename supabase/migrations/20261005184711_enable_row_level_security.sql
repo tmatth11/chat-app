@@ -1,0 +1,3 @@
+ALTER TABLE "public"."chat_room" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."chat_room_member" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."messages" ENABLE ROW LEVEL SECURITY;
