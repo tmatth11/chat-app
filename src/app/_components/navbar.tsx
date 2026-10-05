@@ -14,12 +14,11 @@ import {
 import ModeToggle from "./mode-toggle";
 import { createClient } from "@/src/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/src/hooks/useUser";
 
 export default function Navbar() {
     const [linksDisplay, setLinksDisplay] = useState("hidden");
-    const [loading, setLoading] = useState(true);
-    const [isSignedIn, setIsSignedIn] = useState(false);
-
+    const { loading, isAuthenticated } = useUser();
     const supabase = createClient();
     const router = useRouter();
 
@@ -28,29 +27,6 @@ export default function Navbar() {
         router.push("/");
         router.refresh();
     };
-
-    useEffect(() => {
-        const checkAuth = async () => {
-            // Get initial session and convert to boolean
-            const {
-                data: { session },
-            } = await supabase.auth.getSession();
-            setIsSignedIn(!!session);
-            setLoading(false);
-
-            // Listen for sign-in/sign-out events
-            const {
-                data: { subscription },
-            } = supabase.auth.onAuthStateChange((_event, session) => {
-                setIsSignedIn(!!session);
-                setLoading(false);
-            });
-
-            return () => subscription.unsubscribe();
-        };
-
-        checkAuth();
-    }, [supabase]);
 
     if (loading) return <p>Checking status...</p>;
 
@@ -80,7 +56,7 @@ export default function Navbar() {
                             <span>Chat list</span>
                         </div>
                     </Link>
-                    {!isSignedIn && (
+                    {!isAuthenticated && (
                         <>
                             {/* Log in link */}
                             <Link className="hidden md:flex" href="/auth/login">
@@ -101,7 +77,7 @@ export default function Navbar() {
                             </Link>
                         </>
                     )}
-                    {isSignedIn && (
+                    {isAuthenticated && (
                         // Sign out link
                         <Link
                             className="hidden md:flex"
@@ -163,7 +139,7 @@ export default function Navbar() {
                         <span>Chat list</span>
                     </div>
                 </Link>
-                {!isSignedIn && (
+                {!isAuthenticated && (
                     <>
                         {/* Log in link */}
                         <Link
@@ -187,7 +163,7 @@ export default function Navbar() {
                         </Link>
                     </>
                 )}
-                {isSignedIn && (
+                {isAuthenticated && (
                     // Sign out link
                     <Link
                         href="/chat-list"
