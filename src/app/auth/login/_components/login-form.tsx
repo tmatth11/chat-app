@@ -2,7 +2,7 @@
 
 "use client";
 
-import { createClient } from "@/src/lib/client";
+import { createClient } from "@/src/lib/supabase/client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -24,7 +24,7 @@ export function LoginForm() {
         try {
             const { error } = await supabase.auth.signInWithPassword({
                 email,
-                password
+                password,
             });
 
             if (error) throw error;
