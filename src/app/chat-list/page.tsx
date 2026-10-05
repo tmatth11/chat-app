@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import  EmptyChatList  from "./_components/empty-chat-list";
 
 export const metadata: Metadata = {
-    title: "Chats",
-    description: "View all chats",
+    title: "Chat Room List",
+    description: "View all chat rooms",
 };
 
 export default function ChatListPage() {

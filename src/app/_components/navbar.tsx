@@ -12,9 +12,9 @@ import {
     X,
 } from "lucide-react";
 import ModeToggle from "./mode-toggle";
-import { createClient } from "@/src/lib/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/src/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
 
 export default function Navbar() {
     const [linksDisplay, setLinksDisplay] = useState("hidden");
