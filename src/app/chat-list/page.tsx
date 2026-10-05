@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import  EmptyChatList  from "./_components/empty-chat-list";
 
 export const metadata: Metadata = {
     title: "Chats",
@@ -7,8 +8,9 @@ export const metadata: Metadata = {
 
 export default function ChatListPage() {
     return (
-        <>
-            <p>ChatListPage works!</p>
-        </>
+        <div className="flex flex-col items-center p-4">
+            <h1>Chat Room List</h1>
+            <EmptyChatList />
+        </div>
     );
 }

@@ -40,8 +40,12 @@
 
 /* Headings */
 
+h1 {
+    @apply text-3xl font-semibold text-center;
+}
+
 h4 {
-    @apply font-semibold text-lg;
+    @apply font-semibold text-lg text-center;
 }
 
 /* Form Elements */
