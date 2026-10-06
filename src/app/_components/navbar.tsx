@@ -12,7 +12,7 @@ import {
     X,
 } from "lucide-react";
 import ModeToggle from "./mode-toggle";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/services/supabase/client";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/useUser";
 

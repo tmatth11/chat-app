@@ -1,0 +1,1 @@
+GRANT SELECT, INSERT ON "public"."chat_room" TO service_role;
