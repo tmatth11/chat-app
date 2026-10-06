@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import ChatRoomForm from "./_components/chat-room-form";
 
 export const metadata: Metadata = {
     title: "New Chat Room",
@@ -7,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function NewChatPage() {
     return (
-        <>
-            <p>NewChatPage works!</p>
-        </>
+        <div className="flex justify-center p-4">
+            <ChatRoomForm />
+        </div>
     );
 }

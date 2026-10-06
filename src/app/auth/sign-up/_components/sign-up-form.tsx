@@ -2,11 +2,11 @@
 
 "use client";
 
-import { createClient } from "@/src/lib/supabase/client";
+import { createClient } from "@/services/supabase/client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export function SignUpForm() {
+export default function SignUpForm() {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

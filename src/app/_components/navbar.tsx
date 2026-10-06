@@ -12,9 +12,9 @@ import {
     X,
 } from "lucide-react";
 import ModeToggle from "./mode-toggle";
-import { createClient } from "@/src/lib/supabase/client";
+import { createClient } from "@/services/supabase/client";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/src/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
 
 export default function Navbar() {
     const [linksDisplay, setLinksDisplay] = useState("hidden");
@@ -42,20 +42,24 @@ export default function Navbar() {
                     Chat App
                 </Link>
                 <div className="flex items-center gap-4">
-                    {/* New chat link */}
-                    <Link className="hidden md:flex" href="/new-chat">
-                        <div className="nav-link">
-                            <CirclePlus />
-                            <span>New chat</span>
-                        </div>
-                    </Link>
-                    {/* Chat list link */}
-                    <Link className="hidden md:flex" href="/chat-list">
-                        <div className="nav-link">
-                            <List />
-                            <span>Chat list</span>
-                        </div>
-                    </Link>
+                    {isAuthenticated && (
+                        <>
+                            {/* New chat link */}
+                            <Link className="hidden md:flex" href="/new-chat">
+                                <div className="nav-link">
+                                    <CirclePlus />
+                                    <span>New chat</span>
+                                </div>
+                            </Link>
+                            {/* Chat list link */}
+                            <Link className="hidden md:flex" href="/chat-list">
+                                <div className="nav-link">
+                                    <List />
+                                    <span>Chat list</span>
+                                </div>
+                            </Link>
+                        </>
+                    )}
                     {!isAuthenticated && (
                         <>
                             {/* Log in link */}
@@ -119,26 +123,30 @@ export default function Navbar() {
             </nav>
             {/* Bottom navbar */}
             <div className={`${linksDisplay} flex-col gap-4 p-4 md:hidden`}>
-                {/* New chat link */}
-                <Link
-                    href="/new-chat"
-                    onClick={() => setLinksDisplay("hidden")}
-                >
-                    <div className="nav-link">
-                        <CirclePlus />
-                        <span>New chat</span>
-                    </div>
-                </Link>
-                {/* Chat list link */}
-                <Link
-                    href="/chat-list"
-                    onClick={() => setLinksDisplay("hidden")}
-                >
-                    <div className="nav-link">
-                        <List />
-                        <span>Chat list</span>
-                    </div>
-                </Link>
+                {isAuthenticated && (
+                    <>
+                        {/* New chat link */}
+                        <Link
+                            href="/new-chat"
+                            onClick={() => setLinksDisplay("hidden")}
+                        >
+                            <div className="nav-link">
+                                <CirclePlus />
+                                <span>New chat</span>
+                            </div>
+                        </Link>
+                        {/* Chat list link */}
+                        <Link
+                            href="/chat-list"
+                            onClick={() => setLinksDisplay("hidden")}
+                        >
+                            <div className="nav-link">
+                                <List />
+                                <span>Chat list</span>
+                            </div>
+                        </Link>
+                    </>
+                )}
                 {!isAuthenticated && (
                     <>
                         {/* Log in link */}
