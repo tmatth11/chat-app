@@ -1,0 +1,1 @@
+GRANT INSERT ON "public"."chat_room_member" TO service_role;

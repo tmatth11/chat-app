@@ -1,0 +1,1 @@
+ALTER TABLE "public"."chat_room" ADD COLUMN "created_at" TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL;
