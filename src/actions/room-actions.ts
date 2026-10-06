@@ -69,7 +69,7 @@ export async function createChatRoom(prevState: ChatRoomState, formData: FormDat
     if (membershipError) {
         return {
             success: false,
-            message: "Error: Failed to add user to room",
+            message: "Error: Failed to add user to room.",
         };
     }
 
