@@ -2,7 +2,7 @@
 
 import { createChatRoom } from "@/actions/room-actions";
 import { ChatRoomState } from "@/types";
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 
 const initialState: ChatRoomState = {};
 
