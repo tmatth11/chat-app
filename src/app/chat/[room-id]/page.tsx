@@ -26,5 +26,9 @@ export default async function ChatRoomPage({ params }: ChatRoomPageProps) {
         return notFound();
     }
 
-    return <RoomClient user={user} room={room} messages={messages} />;
+    return (
+        <div className="flex flex-col items-center overflow-x-hidden p-4">
+            <RoomClient user={user} room={room} messages={messages} />
+        </div>
+    );
 }
