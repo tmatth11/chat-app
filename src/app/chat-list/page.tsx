@@ -3,6 +3,7 @@ import EmptyChatList from "./_components/empty-chat-list";
 import { getJoinedRooms, getPublicRooms } from "@/lib/data";
 import { getCurrentUser } from "@/lib/get-current-user";
 import { redirect } from "next/navigation";
+import RoomList from "./_components/room-list";
 
 export const metadata: Metadata = {
     title: "Chat Room List",
@@ -15,8 +16,6 @@ export default async function ChatListPage() {
         redirect("/auth/login");
     }
 
-    console.log("user id:", user.id);
-
     const [publicRooms, joinedRooms] = await Promise.all([
         getPublicRooms(),
         getJoinedRooms(user.id),
@@ -27,8 +26,18 @@ export default async function ChatListPage() {
     return (
         <div className="flex flex-col items-center p-4">
             <h1>Chat Room List</h1>
-            {hasNoRooms && (
+            {hasNoRooms ? (
                 <EmptyChatList />
+            ) : (
+                <div className="flex flex-col gap-2 md:w-xl">
+                    <RoomList title="Your Rooms" rooms={joinedRooms} isJoined />
+                    <RoomList
+                        title="Public Rooms"
+                        rooms={publicRooms.filter((room) =>
+                            !joinedRooms.some((r) => r.id === room.id),
+                        )}
+                    />
+                </div>
             )}
         </div>
     );
