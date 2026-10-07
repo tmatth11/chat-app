@@ -90,7 +90,8 @@ export async function getUser() {
     const { data, error } = await supabase
         .from("profiles")
         .select("id, username")
-        .eq("id", user.id);
+        .eq("id", user.id)
+        .single();
 
     // Return null if error has occurred
     if (error) {
@@ -102,12 +103,11 @@ export async function getUser() {
 }
 
 export async function getMessages(roomId: string) {
-    const user = await getCurrentUser();
     const supabase = createAdminClient();
 
     const { data, error } = await supabase
         .from("messages")
-        .select("id, text, created_at, author_id, author:user_profile (username)")
+        .select("id, text, created_at, author_id, author:profiles (username)")
         .eq("chat_room_id", roomId)
         .order("created_at", { ascending: false })
         .limit(10);
