@@ -1,0 +1,1 @@
+GRANT INSERT ON "public"."messages" TO service_role;

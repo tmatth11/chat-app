@@ -1,4 +1,5 @@
 import { createAdminClient } from "@/services/supabase/server";
+import { getCurrentUser } from "./get-current-user";
 
 export async function getPublicRooms() {
     const supabase = createAdminClient();
@@ -47,4 +48,75 @@ export async function getJoinedRooms(userId: string) {
             name: room.name,
             memberCount: room.chat_room_member.length,
         }));
+}
+
+export async function getRoom(id: string) {
+    const user = await getCurrentUser();
+
+    // Return null if user is not found
+    if (user == null) {
+        return null;
+    }
+
+    const supabase = createAdminClient();
+
+    // Get rooms that user is a member of
+    const { data: room, error } = await supabase
+        .from("chat_room")
+        .select("id, name, chat_room_member!inner ()")
+        .eq("id", id)
+        .eq("chat_room_member.id", user.id)
+        .single();
+
+    // Return null if error has occurred
+    if (error) {
+        console.error("Error:", error);
+        return null;
+    }
+
+    return room;
+}
+
+export async function getUser() {
+    const user = await getCurrentUser();
+    const supabase = createAdminClient();
+
+    // Return null if user is not found
+    if (user == null) {
+        return null;
+    }
+
+    // Get user ID and name from profiles table
+    const { data, error } = await supabase
+        .from("profiles")
+        .select("id, username")
+        .eq("id", user.id)
+        .single();
+
+    // Return null if error has occurred
+    if (error) {
+        console.log("Error:", error);
+        return null;
+    }
+
+    return data;
+}
+
+export async function getMessages(roomId: string) {
+    const supabase = createAdminClient();
+
+    const { data, error } = await supabase
+        .from("messages")
+        .select("id, text, created_at, author_id, author:profiles (username)")
+        .eq("chat_room_id", roomId)
+        .order("created_at", { ascending: false })
+        .limit(10);
+
+    // Return empty array if error has occurred
+    if (error) {
+        console.error("Error:", error);
+        return [];
+    }
+
+    return data;
 }
